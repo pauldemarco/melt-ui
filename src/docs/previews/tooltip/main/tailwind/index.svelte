@@ -2,35 +2,17 @@
 	import { createTooltip, melt } from '$lib/index.js';
 	import { fade } from 'svelte/transition';
 	import { Plus } from 'lucide-svelte';
+	import ListTile from './ListTile.svelte'
 
-	const {
-		elements: { trigger, content, arrow },
-		states: { open },
-	} = createTooltip({
-		positioning: {
-			placement: 'top',
-		},
-		openDelay: 0,
-		closeDelay: 0,
-		closeOnPointerDown: false,
-		forceVisible: true,
-	});
+	const items = Array.from(Array(5), (_, index) => index);
+
 </script>
 
-<button type="button" class="trigger" use:melt={$trigger} aria-label="Add">
-	<Plus class="square-4" aria-label="plus" />
-</button>
-
-{#if $open}
-	<div
-		use:melt={$content}
-		transition:fade={{ duration: 100 }}
-		class="z-10 rounded-lg bg-white shadow"
-	>
-		<div use:melt={$arrow} />
-		<p class="px-4 py-1 text-magnum-700">Add item to library</p>
-	</div>
-{/if}
+<div class="w-full flex flex-col gap-2">
+    {#each items as item}
+    <ListTile title={item} />
+    {/each}
+  </div>
 
 <style lang="postcss">
 	.trigger {
