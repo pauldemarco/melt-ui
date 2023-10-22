@@ -14,7 +14,11 @@
 		closeDelay: 0,
 		closeOnPointerDown: false,
 		forceVisible: true,
-        group:true
+        group:true,
+        onOpenChange: (v) => {
+            console.log("Tooltip: ", title, v.next);
+            return v.next;
+        }
 	});
 
     export let title:string;
